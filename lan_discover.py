@@ -13,16 +13,31 @@ from mac_vendor_lookup import MacLookup
 import netifaces
 import nmap
 import pprint
+from pyroute2 import IPRoute
 import sys
-
-'''
-Need to run macchanger before scanning the network.
-'''
 
 hosts_info = {}
 
 def_gate = netifaces.gateways()['default'][netifaces.AF_INET]
 dev = def_gate[1]
+
+'''
+Need to run macchanger before scanning the network.
+'''
+
+# Linux rtnetlink protocol modulw used to disable
+# network interface before changing MAC address.
+print("[DBG] Looking up %s netlink attributes" % dev)
+ip = IPRoute()
+attrs = { 'IFLA_OPERSTATE': None,
+          'IFLA_ADDRESS': None }
+idx = ip.link_lookup(ifname=dev)[0]
+link = ip.get_links(idx)[0]
+for a in attrs.keys():
+    attrs[a] = link.get_attr(a)
+
+print(attrs)
+sys.exit()
 
 ip_info = netifaces.ifaddresses(dev)[netifaces.AF_INET]
 addr = ip_info[0]["addr"]
