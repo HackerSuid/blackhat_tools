@@ -25,7 +25,7 @@ dev = def_gate[1]
 Need to run macchanger before scanning the network.
 '''
 
-# Linux rtnetlink protocol modulw used to disable
+# Linux rtnetlink protocol module used to disable
 # network interface before changing MAC address.
 print("[DBG] Looking up %s netlink attributes" % dev)
 ip = IPRoute()
@@ -37,6 +37,9 @@ for a in attrs.keys():
     attrs[a] = link.get_attr(a)
 
 print(attrs)
+if attrs['IFLA_OPERSTATE'] == 'UP':
+    print("\t[*] %s found up, setting link down." % dev)
+    #ip.link('set', index=idx, state='down')
 sys.exit()
 
 ip_info = netifaces.ifaddresses(dev)[netifaces.AF_INET]
