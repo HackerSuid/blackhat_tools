@@ -10,10 +10,27 @@ import sys
 import random
 import os
 
-ap_slander = [ 'sup motherfucker', 'is gay', 'is a faggot',
-               'is a little bitch', 'is a pussy', 'is a waste of space',
-               'what a loser', 'lol retard', 'tweaker', 'lowlife',
-               'trash', 'binge anotha one' ]
+ap_slander = [
+    'sup motherfucker',
+    'is gay',
+    'is a faggot',
+    'is a little bitch',
+    'is a pussy',
+    'is a waste of space',
+    'what a loser',
+    'lol retard',
+    'tweaker',
+    'lowlife',
+    'trash',
+    'binge anotha one',
+    'is a dipshit',
+    'has a negative IQ',
+    'is a cuck',
+    'lowest scum in town',
+    'is under targeted surveillance',
+    'is a fuck up',
+    'should be euthanized',
+    'should ingest cyanide' ]
 
 def main():
     if len(sys.argv) < 3:
@@ -25,7 +42,7 @@ def main():
 
     frames =[]
     for suffix in ap_slander:
-        ssid = name+' '+suffix
+        ssid = name+' '+suffix.upper()
         print(ssid)
         dot11 = Dot11(type=0, subtype=8, addr1='ff:ff:ff:ff:ff:ff',
         addr2=str(RandMAC()), addr3=str(RandMAC()))
