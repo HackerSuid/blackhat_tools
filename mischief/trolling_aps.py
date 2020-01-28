@@ -27,7 +27,6 @@ ap_slander = [
     'has a negative IQ',
     'is a cuck',
     'lowest scum in town',
-    'is under targeted surveillance',
     'is a fuck up',
     'should be euthanized',
     'should ingest cyanide' ]
